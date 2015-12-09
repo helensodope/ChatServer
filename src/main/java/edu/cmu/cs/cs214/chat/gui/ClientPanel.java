@@ -7,7 +7,9 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -204,10 +206,9 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
         // Usage: dateFormatter.format(date) -> String
         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss Z");
 
-        // TODO: Make the server show the timestamp of the received message.
-        // Example output: [15:21:40 -0400] Person: Some message...
-
-        String newText = String.format(" %s: %s%n", msg.getSender(),
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        String date = df.format(new Date());
+        String newText = String.format("[%s] %s: %s%n", date, msg.getSender(),
                 msg.getContent());
         this.chatArea.append(newText);
         chatArea.setCaretPosition(chatArea.getDocument().getLength());
